@@ -16,7 +16,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="http://localhost/php/dynamiska/pizza_shop/pizza_shop/databasteori/index.php">Customer Info <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="http://localhost/php/dynamiska/pizza_shop/pizza_shop/databasteori/order.php">Order</a>
@@ -35,7 +35,7 @@
 <h1 class="text-center">Select your order</h1>
 
 <br>
-
+<form action="index.php" method="post">
 <!-- Pizza size here-->
 <div class="container">
   <div class="row">
@@ -55,13 +55,13 @@
             //foreach loop to display db data in radio button
            foreach ($pizza_size as $row)
             {
-              echo "<div class=''>
+              echo "<div class='float-left'>
               
               <div class='form-check'>
               
-              <input type='radio' id='{$row['size_ name']}' value='{$row['size_ name']}' name='size' >
+              <input type='radio' id='{$row['size_name']}' value='{$row['size_id']}' name='size' >
 
-              <label>{$row['size_ name']} </label><br>
+              <label>{$row['size_name']} - {$row['size_price']} € </label><br>
 
               </div>
               
@@ -108,42 +108,53 @@
 <br>
 <br>
 
+<!-- Query för toppings -->
+<?php 
+$toppings = $pdo->query('SELECT * FROM pizza_topppings')->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!--Pizza toppings start here -->
 <div class="container"><h3 class="text-left pb-2">Select Topping</h3>
   <div class="row">
     <div class="col-sm">
-    <select class="form-select" aria-label="Disabled select example" enabled>
-  <option selected>Open this select menu</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</select>
+     <select class="form-select" aria-label="Disabled select example" enabled>
+       <option selected>Topping 1</option>
+         <?php foreach($toppings as $row){
+             echo "<option value='{$row['top_id']}' >{$row['top_name']}</option>"; 
+           }
+           ?>
+      </select>
     </div>
+
+   <div class="col-sm">
+     <select class="form-select" aria-label="Disabled select example" enabled>
+      <option selected>Topping 2</option>
+        <?php foreach($toppings as $row){
+           echo "<option value='{$row['top_id']}' >{$row['top_name']}</option>"; 
+         }
+         ?>
+     </select>
+    </div>
+
     <div class="col-sm">
-    <select class="form-select" aria-label="Disabled select example" enabled>
-  <option selected>Open this select menu</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</select>
+     <select class="form-select" aria-label="Disabled select example" enabled>
+       <option selected>Topping 3</option>
+         <?php foreach($toppings as $row){
+           echo "<option value='{$row['top_id']}' >{$row['top_name']}</option>"; 
+         }
+         ?>
+      </select>
     </div>
+
     <div class="col-sm">
-    <select class="form-select" aria-label="Disabled select example" enabled>
-  <option selected>Open this select menu</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</select>
+       <select class="form-select" aria-label="Disabled select example" enabled>
+         <option selected>Topping 4</option>
+           <?php foreach($toppings as $row){
+             echo "<option value='{$row['top_id']}' >{$row['top_name']}</option>"; 
+           }
+          ?>
+        </select>
     </div>
-    <div class="col-sm">
-    <select class="form-select" aria-label="Disabled select example" enabled>
-  <option selected>Open this select menu</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</select>
-    </div>
-  </div>
+
 </div>
 <!--Pizza toppings end here -->
 
@@ -239,12 +250,13 @@
 <br>
 <br>
 
-<!-- Next page button start here -->
+<!-- Next page button start here
 <div class="container pb-4">
 <a href="http://localhost/php/dynamiska/pizza_shop/pizza_shop/databasteori/index.php" class="btn btn-info" role="button">Next</a>
 </div>
-<!-- Next page button end here -->
-
+ Next page button end here -->
+<input type="submit" value="next">
+          </form>
 <!-- Bootstrap link here -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>

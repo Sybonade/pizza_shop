@@ -14,7 +14,8 @@ function addOrder($pdo){
 	$stmt_insertCustomer->bindParam(':phone' , $_POST['phone'], PDO::PARAM_STR);
 	$stmt_insertCustomer->bindParam(':email' , $_POST['email'], PDO::PARAM_STR);
 	$stmt_insertCustomer->execute();
-	
+
+
 }
 
 

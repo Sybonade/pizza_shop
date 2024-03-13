@@ -5,7 +5,7 @@ include_once'includes/functions.php';
 
 $pizza_size = $pdo->query('SELECT * FROM pizza_size');
 
-if($_SERVER['REQUEST_METHOD'] == 'POST') {
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$orderInsertStatus=addOrder($pdo);
 	
 }
@@ -27,7 +27,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#">Customer Info <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="http://localhost/php/dynamiska/pizza_shop/pizza_shop/databasteori/order.php">Order</a>
@@ -66,8 +66,21 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
   <input type="submit" value="Submit">
 </form> 
 
+<?php 
+	$cust_id = $pdo->query('SELECT * FROM pizza_customer WHERE customer_id IS NOT NULL ORDER BY 1 DESC LIMIT 1');
+  foreach($cust_id as $row){
+    echo $row['customer_fname'];
+    echo $row['customer_lname'];
+    echo $row['customer_adress'];
+    echo $row['customer_zip'];
+    echo $row['customer_city'];
+    echo $row['customer_phone'];
+    echo $row['customer_email'];
 
 
+  }
+
+?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
