@@ -9,7 +9,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$orderInsertStatus=addOrder($pdo);
 	
 }
-echo <br>;
+
 ?>
 
 
@@ -30,7 +30,7 @@ echo <br>;
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="http://localhost/php/dynamiska/databasteori/order.php">Order</a>
+        <a class="nav-link" href="http://localhost/php/dynamiska/pizza_shop/pizza_shop/databasteori/order.php">Order</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Pricing</a>

@@ -55,15 +55,24 @@
             //foreach loop to display db data in radio button
            foreach ($pizza_size as $row)
             {
-              echo "<div><input type='radio' id='{$row['size_ name']}' value='{$row['size_ name']}' name='size' >
-              <label> {$row['size_ name']} </label><br></div>";
+              echo "<div class='col'>
+              
+              <div class='form-check'>
+              
+              <input type='radio' id='{$row['size_ name']}' value='{$row['size_ name']}' name='size' >
+
+              <label>{$row['size_ name']} </label><br>
+
+              </div>
+              
+              </div>";
         
             }
           ?>
       </label>
     </div>
     <!-- Pizza size here-->
-    
+
 
     <!-- Temporary comments under this -->
     <!--
