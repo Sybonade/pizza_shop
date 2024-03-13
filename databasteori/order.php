@@ -49,13 +49,13 @@
     $pizza_size = $pdo->query('SELECT * FROM pizza_size');
     ?>
     <!-- Container for radio buttons-->
-    <div class="container">
+    <div class="container-fluid">
       <label class="form-check-label" for="flexRadioDefault1">
          <?php
             //foreach loop to display db data in radio button
            foreach ($pizza_size as $row)
             {
-              echo "<div class='col'>
+              echo "<div class=''>
               
               <div class='form-check'>
               
