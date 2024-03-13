@@ -76,8 +76,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo $row['customer_city'];
     echo $row['customer_phone'];
     echo $row['customer_email'];
-
-
   }
 
 ?>
