@@ -10,36 +10,36 @@ if(isset($_POST['order-info'])){
   $_SESSION['topping4'] = $_POST['topping4'];
 
   if(isset($_POST['oregano'])){
-  $_SESSION['oregano'] = $_POST['oregano'];
+  $_SESSION['oregano'] = 1;
   }
   else {
-    $_SESSION['oregano'] = "No oregano";
+    $_SESSION['oregano'] = 0;
   }
 
 
   if(isset($_POST['garlic'])){
-    $_SESSION['garlic'] = $_POST['garlic'];
+    $_SESSION['garlic'] = 1;
     }
     else {
-      $_SESSION['garlic'] = "No garlic";
+      $_SESSION['garlic'] = 0;
     }
 
 
     if(isset($_POST['allergy'])){
-      $_SESSION['allergy'] = $_POST['allergy'];
+      $_SESSION['allergy'] = 1;
       }
       else {
-        $_SESSION['allergy'] = "No allergy";
+        $_SESSION['allergy'] = 0;
       }
    
       if(isset($_POST['delivery'])){
-           $_SESSION['delivery'] = $_POST['delivery'];
+           $_SESSION['delivery'] = 1;
        } 
        else {
-        $_SESSION['delivery'] = "No delivery";
+        $_SESSION['delivery'] = 0;
        }     
        
-       if(isset($_POST['delivery'])){
+       if(isset($_POST['additional-info'])){
        $_SESSION['additional-info'] = $_POST['additional-info'];
   }
 }
@@ -51,9 +51,10 @@ $pizza_size = $pdo->query('SELECT * FROM pizza_size');
 
 if(isset($_POST['complete-order'])) {
 	$orderInsertStatus=addOrder($pdo);
-	
+	echo $orderInsertStatus;
 }
-$cust_id = $pdo->query('SELECT * FROM pizza_customer WHERE customer_id IS NOT NULL ORDER BY 1 DESC LIMIT 1');
+
+  //$cust_id = $pdo->query('SELECT * FROM pizza_customer WHERE customer_id IS NOT NULL ORDER BY 1 DESC LIMIT 1');
 
 
 ?>

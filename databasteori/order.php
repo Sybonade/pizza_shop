@@ -89,7 +89,6 @@ $toppings = $pdo->query('SELECT * FROM pizza_topppings')->fetchAll(PDO::FETCH_AS
   <div class="row">
     <div class="col-sm">
      <select class="form-select" required="required" name="topping1" id="topping1" aria-label="Disabled select example" enabled>
-       <option selected>Topping 1</option>
          <?php foreach($toppings as $row){
              echo "<option value='{$row['top_id']}' >{$row['top_name']}</option>"; 
            }
@@ -99,7 +98,6 @@ $toppings = $pdo->query('SELECT * FROM pizza_topppings')->fetchAll(PDO::FETCH_AS
 
    <div class="col-sm">
      <select class="form-select" required="required" name="topping2" id="topping2" aria-label="Disabled select example" enabled>
-      <option selected >Topping 2</option>
         <?php foreach($toppings as $row){
            echo "<option value='{$row['top_id']}' >{$row['top_name']}</option>"; 
          }
@@ -109,7 +107,6 @@ $toppings = $pdo->query('SELECT * FROM pizza_topppings')->fetchAll(PDO::FETCH_AS
 
     <div class="col-sm">
      <select class="form-select" required="required" name="topping3" id="topping3" aria-label="Disabled select example" enabled>
-       <option selected>Topping 3</option>
          <?php foreach($toppings as $row){
            echo "<option value='{$row['top_id']}' >{$row['top_name']}</option>"; 
          }
@@ -119,7 +116,6 @@ $toppings = $pdo->query('SELECT * FROM pizza_topppings')->fetchAll(PDO::FETCH_AS
 
     <div class="col-sm">
        <select class="form-select" required="required" name="topping4" id="topping4" aria-label="Disabled select example" enabled>
-         <option selected >Topping 4</option>
            <?php foreach($toppings as $row){
              echo "<option value='{$row['top_id']}' >{$row['top_name']}</option>"; 
            }
@@ -211,7 +207,7 @@ $toppings = $pdo->query('SELECT * FROM pizza_topppings')->fetchAll(PDO::FETCH_AS
      <form id="form-box">
         <div class="form-group">
          <label for="additional-info"><h3>Additional info</h3></label>
-         <textarea class="form-control" id="additional-info" rows="3"></textarea>
+         <textarea class="form-control" name="additional-info" id="additional-info" rows="3"></textarea>
         </div>
       </form>
     </div>
