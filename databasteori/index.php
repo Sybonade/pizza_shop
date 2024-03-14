@@ -2,13 +2,59 @@
 include_once'includes/config.php';
 include_once'includes/functions.php';
 
+if(isset($_POST['order-info'])){
+  $_SESSION['size'] = $_POST['size'];
+  $_SESSION['topping1'] = $_POST['topping1'];
+  $_SESSION['topping2'] = $_POST['topping2'];
+  $_SESSION['topping3'] = $_POST['topping3'];
+  $_SESSION['topping4'] = $_POST['topping4'];
+
+  if(isset($_POST['oregano'])){
+  $_SESSION['oregano'] = $_POST['oregano'];
+  }
+  else {
+    $_SESSION['oregano'] = "No oregano";
+  }
+
+
+  if(isset($_POST['garlic'])){
+    $_SESSION['garlic'] = $_POST['garlic'];
+    }
+    else {
+      $_SESSION['garlic'] = "No garlic";
+    }
+
+
+    if(isset($_POST['allergy'])){
+      $_SESSION['allergy'] = $_POST['allergy'];
+      }
+      else {
+        $_SESSION['allergy'] = "No allergy";
+      }
+   
+      if(isset($_POST['delivery'])){
+           $_SESSION['delivery'] = $_POST['delivery'];
+       } 
+       else {
+        $_SESSION['delivery'] = "No delivery";
+       }     
+       
+       if(isset($_POST['delivery'])){
+       $_SESSION['additional-info'] = $_POST['additional-info'];
+  }
+}
+
+
 
 $pizza_size = $pdo->query('SELECT * FROM pizza_size');
 
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+if(isset($_POST['complete-order'])) {
 	$orderInsertStatus=addOrder($pdo);
 	
 }
+$cust_id = $pdo->query('SELECT * FROM pizza_customer WHERE customer_id IS NOT NULL ORDER BY 1 DESC LIMIT 1');
+
 
 ?>
 
@@ -38,10 +84,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     </ul>
   </div>
 </nav>
-<h2>Customer Info</h2>
+<h2 class="ml-5" >Customer Info</h2>
 
 
-<form action="" method="post">
+<form action="" method="post" class="ml-5">
   <label for="fname">First name:</label><br>
   <input type="text" id="fname" name="fname" value="John" required="required"><br><br>
   
@@ -63,21 +109,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   <label for="email">Email:</label><br>
   <input type="text" id="email" name="email" value="john.doe@example.com"><br><br>
   
-  <input type="submit" value="Submit">
+  <input name="complete-order" type="submit" value="Submit">
 </form> 
 
 <?php 
-	$cust_id = $pdo->query('SELECT * FROM pizza_customer WHERE customer_id IS NOT NULL ORDER BY 1 DESC LIMIT 1');
-  foreach($cust_id as $row){
-    echo $row['customer_fname'];
-    echo $row['customer_lname'];
-    echo $row['customer_adress'];
-    echo $row['customer_zip'];
-    echo $row['customer_city'];
-    echo $row['customer_phone'];
-    echo $row['customer_email'];
-  }
 
+  var_dump($_POST);
+  var_dump($_SESSION);
+  
 ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

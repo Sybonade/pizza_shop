@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<?php
+  include_once'includes/config.php';
+  include_once'includes/functions.php';
+
+  
+
+
+?>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,7 +18,6 @@
   <title>Document</title>
 </head>
 <body>
-
 
   <!--Navbar för sidan -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -42,15 +50,13 @@
 
     <?php
     //including config and functions folder
-    include_once'includes/config.php';
-    include_once'includes/functions.php';
     
     //$pizza_size fetching db data
     $pizza_size = $pdo->query('SELECT * FROM pizza_size');
     ?>
     <!-- Container for radio buttons-->
     <div class="container-fluid">
-      <label class="form-check-label" for="flexRadioDefault1">
+      <label class="form-check-label" for="size" id="size" name="size">
          <?php
             //foreach loop to display db data in radio button
            foreach ($pizza_size as $row)
@@ -71,40 +77,6 @@
           ?>
       </label>
     </div>
-    <!-- Pizza size here-->
-
-
-    <!-- Temporary comments under this -->
-    <!--
-    <div class="col-sm">
-    <div class="form-check">
-         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-           <label class="form-check-label" for="flexRadioDefault1">
-            Normal
-           </label>
-        </div>
-    </div>
-    <div class="col-sm">
-    <div class="form-check">
-         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-           <label class="form-check-label" for="flexRadioDefault1">
-            Large
-           </label>
-        </div>
-    </div>
-    <div class="col-sm">
-    <div class="form-check">
-         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-           <label class="form-check-label" for="flexRadioDefault1">
-            Family
-           </label>
-        </div>
-    </div>
-  </div>
-</div>
-  -->
-<!-- the above is commented out temporarily -->
-
 <br>
 <br>
 
@@ -116,7 +88,7 @@ $toppings = $pdo->query('SELECT * FROM pizza_topppings')->fetchAll(PDO::FETCH_AS
 <div class="container"><h3 class="text-left pb-2">Select Topping</h3>
   <div class="row">
     <div class="col-sm">
-     <select class="form-select" aria-label="Disabled select example" enabled>
+     <select class="form-select" required="required" name="topping1" id="topping1" aria-label="Disabled select example" enabled>
        <option selected>Topping 1</option>
          <?php foreach($toppings as $row){
              echo "<option value='{$row['top_id']}' >{$row['top_name']}</option>"; 
@@ -126,8 +98,8 @@ $toppings = $pdo->query('SELECT * FROM pizza_topppings')->fetchAll(PDO::FETCH_AS
     </div>
 
    <div class="col-sm">
-     <select class="form-select" aria-label="Disabled select example" enabled>
-      <option selected>Topping 2</option>
+     <select class="form-select" required="required" name="topping2" id="topping2" aria-label="Disabled select example" enabled>
+      <option selected >Topping 2</option>
         <?php foreach($toppings as $row){
            echo "<option value='{$row['top_id']}' >{$row['top_name']}</option>"; 
          }
@@ -136,7 +108,7 @@ $toppings = $pdo->query('SELECT * FROM pizza_topppings')->fetchAll(PDO::FETCH_AS
     </div>
 
     <div class="col-sm">
-     <select class="form-select" aria-label="Disabled select example" enabled>
+     <select class="form-select" required="required" name="topping3" id="topping3" aria-label="Disabled select example" enabled>
        <option selected>Topping 3</option>
          <?php foreach($toppings as $row){
            echo "<option value='{$row['top_id']}' >{$row['top_name']}</option>"; 
@@ -146,8 +118,8 @@ $toppings = $pdo->query('SELECT * FROM pizza_topppings')->fetchAll(PDO::FETCH_AS
     </div>
 
     <div class="col-sm">
-       <select class="form-select" aria-label="Disabled select example" enabled>
-         <option selected>Topping 4</option>
+       <select class="form-select" required="required" name="topping4" id="topping4" aria-label="Disabled select example" enabled>
+         <option selected >Topping 4</option>
            <?php foreach($toppings as $row){
              echo "<option value='{$row['top_id']}' >{$row['top_name']}</option>"; 
            }
@@ -167,16 +139,16 @@ $toppings = $pdo->query('SELECT * FROM pizza_topppings')->fetchAll(PDO::FETCH_AS
   <div class="row">
     <div class="col-2">
        <div class="form-check">
-         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-         <label class="form-check-label" for="flexCheckDefault">
+         <input class="form-check-input" type="checkbox" value="oregano" name="oregano" id="oregano">
+         <label class="form-check-label" for="oregano">
             Oregano
           </label>
       </div>
     </div>
     <div class="col-2">
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefault">
+        <input class="form-check-input" type="checkbox" value="garlic" name="garlic" id="garlic">
+        <label class="form-check-label" for="garlic">
         Garlic
         </label>
       </div>
@@ -194,9 +166,9 @@ $toppings = $pdo->query('SELECT * FROM pizza_topppings')->fetchAll(PDO::FETCH_AS
   <div class="row">
     <div class="col-1">
     <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefault">
-        Garlic
+        <input class="form-check-input" type="checkbox" value="allergy" name="allergy" id="allergy">
+        <label class="form-check-label" for="allergy">
+        Gluten
         </label>
       </div>
     </div>
@@ -212,16 +184,16 @@ $toppings = $pdo->query('SELECT * FROM pizza_topppings')->fetchAll(PDO::FETCH_AS
   <div class="row">
     <div class="col-2">
     <div class="form-check">
-         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-           <label class="form-check-label" for="flexRadioDefault1">
-            Deliver
+         <input class="form-check-input" required type="radio" value="delivery"  id="delivery">
+           <label  class="form-check-label" for="delivery">
+            Delivery
            </label>
         </div>
     </div>
     <div class="col-2">
     <div class="form-check">
-         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-           <label class="form-check-label" for="flexRadioDefault1">
+         <input class="form-check-input" type="radio" value="pick-up" name="pick-up" id="pick-up">
+           <label class="form-check-label" for="pick-up">
             Pick-up
            </label>
         </div>
@@ -238,8 +210,8 @@ $toppings = $pdo->query('SELECT * FROM pizza_topppings')->fetchAll(PDO::FETCH_AS
 <div class="container">
      <form id="form-box">
         <div class="form-group">
-         <label for="exampleFormControlTextarea1"><h3>Additional info</h3></label>
-         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+         <label for="additional-info"><h3>Additional info</h3></label>
+         <textarea class="form-control" id="additional-info" rows="3"></textarea>
         </div>
       </form>
     </div>
@@ -255,7 +227,7 @@ $toppings = $pdo->query('SELECT * FROM pizza_topppings')->fetchAll(PDO::FETCH_AS
 <a href="http://localhost/php/dynamiska/pizza_shop/pizza_shop/databasteori/index.php" class="btn btn-info" role="button">Next</a>
 </div>
  Next page button end here -->
-<input type="submit" value="next">
+<input type="submit" value="next" name="order-info">
           </form>
 <!-- Bootstrap link here -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

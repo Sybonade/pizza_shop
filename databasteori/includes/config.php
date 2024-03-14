@@ -1,5 +1,6 @@
 <?php
-
+session_start();
+$_SESSION['test'] = "sessionen är i gång";
 $host = '127.0.0.1';
 $db   = '2024_axxel_dyn_startupg';
 $user = 'root';
