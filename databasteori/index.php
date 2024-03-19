@@ -1,80 +1,15 @@
 <?php
-include_once'includes/config.php';
-include_once'includes/functions.php';
-
-if(isset($_POST['order-info'])){
-  $_SESSION['size'] = $_POST['size'];
-  $_SESSION['topping1'] = $_POST['topping1'];
-  $_SESSION['topping2'] = $_POST['topping2'];
-  $_SESSION['topping3'] = $_POST['topping3'];
-  $_SESSION['topping4'] = $_POST['topping4'];
-
-  if(isset($_POST['oregano'])){
-  $_SESSION['oregano'] = 1;
-  }
-  else {
-    $_SESSION['oregano'] = 0;
-  }
-
-
-  if(isset($_POST['garlic'])){
-    $_SESSION['garlic'] = 1;
-    }
-    else {
-      $_SESSION['garlic'] = 0;
-    }
-
-
-    if(isset($_POST['allergy'])){
-      $_SESSION['allergy'] = 1;
-      }
-      else {
-        $_SESSION['allergy'] = 0;
-      }
-   
-      if(isset($_POST['delivery'])){
-           $_SESSION['delivery'] = 1;
-       } 
-       else {
-        $_SESSION['delivery'] = 0;
-       }     
-       
-       if(isset($_POST['additional-info'])){
-       $_SESSION['additional-info'] = $_POST['additional-info'];
-  }
-}
-
-
-
-$pizza_size = $pdo->query('SELECT * FROM pizza_size');
-
-
-if(isset($_POST['complete-order'])) {
-	$orderInsertStatus=addOrder($pdo);
-	echo $orderInsertStatus;
-}
-
-  //$cust_id = $pdo->query('SELECT * FROM pizza_customer WHERE customer_id IS NOT NULL ORDER BY 1 DESC LIMIT 1');
-
-
+  include_once'includes/config.php';
+  include_once'includes/functions.php';
+  include_once 'includes/header.php';
 ?>
 
-
-
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <title>Document</title>
-</head>
-<body>
+  <!--Navbar för sidan 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Customer Info <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="http://localhost/php/dynamiska/pizza_shop/pizza_shop/databasteori/index.php">Customer Info <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="http://localhost/php/dynamiska/pizza_shop/pizza_shop/databasteori/order.php">Order</a>
@@ -85,41 +20,200 @@ if(isset($_POST['complete-order'])) {
     </ul>
   </div>
 </nav>
-<h2 class="ml-5" >Customer Info</h2>
+    End för navbar för sidan -->
+
+<br>
+
+<!-- Page title -->
+<h1 class="text-center">Select your order</h1>
+
+<br>
+<form action="index.php" method="post">
+<!-- Pizza size here-->
+<div class="container">
+  <div class="row">
+
+    <?php
+    //including config and functions folder
+    
+    //$pizza_size fetching db data
+    $pizza_size = $pdo->query('SELECT * FROM pizza_size');
+    ?>
+    <!-- Container for radio buttons-->
+    <div class="container-fluid">
+      <label class="form-check-label" for="size" id="size" name="size">
+         <?php
+            //foreach loop to display db data in radio button
+           foreach ($pizza_size as $row)
+            {
+              echo "<div class='float-left'>
+              
+              <div class='form-check'>
+              
+              <input type='radio' id='{$row['size_name']}' value='{$row['size_id']}' name='size' >
+
+              <label>{$row['size_name']} - {$row['size_price']} € </label><br>
+
+              </div>
+              
+              </div>";
+        
+            }
+          ?>
+      </label>
+    </div>
+          </div>
+<br>
+<br>
+
+<!-- Query för toppings -->
+<?php 
+$toppings = $pdo->query('SELECT * FROM pizza_topppings')->fetchAll(PDO::FETCH_ASSOC);
+?>
+<!--Pizza toppings start here -->
+<div class="container"><h3 class="text-left pb-2">Select Topping</h3>
+  <div class="row">
+    <div class="col-sm">
+     <select class="form-select" required="required" name="topping1" id="topping1" aria-label="Disabled select example" enabled>
+         <?php foreach($toppings as $row){
+             echo "<option value='{$row['top_id']}' >{$row['top_name']}</option>"; 
+           }
+           ?>
+      </select>
+    </div>
+
+   <div class="col-sm">
+     <select class="form-select" required="required" name="topping2" id="topping2" aria-label="Disabled select example" enabled>
+        <?php foreach($toppings as $row){
+           echo "<option value='{$row['top_id']}' >{$row['top_name']}</option>"; 
+         }
+         ?>
+     </select>
+    </div>
+
+    <div class="col-sm">
+     <select class="form-select" required="required" name="topping3" id="topping3" aria-label="Disabled select example" enabled>
+         <?php foreach($toppings as $row){
+           echo "<option value='{$row['top_id']}' >{$row['top_name']}</option>"; 
+         }
+         ?>
+      </select>
+    </div>
+
+    <div class="col-sm">
+       <select class="form-select" required="required" name="topping4" id="topping4" aria-label="Disabled select example" enabled>
+           <?php foreach($toppings as $row){
+             echo "<option value='{$row['top_id']}' >{$row['top_name']}</option>"; 
+           }
+          ?>
+        </select>
+    </div>
+
+</div>
+<!--Pizza toppings end here -->
 
 
-<form action="" method="post" class="ml-5">
-  <label for="fname">First name:</label><br>
-  <input type="text" id="fname" name="fname" value="John" required="required"><br><br>
-  
-  <label for="lname">Last name:</label><br>
-  <input type="text" id="lname" name="lname" value="Doe" required="required"><br><br>
-  
-  <label for="adress">Adress:</label><br>
-  <input type="text" id="adress" name="adress" value="Kivipellonkatu 2" required="required"><br><br>
-  
-  <label for="zip">Zip Code:</label><br>
-  <input type="text" id="zip" name="zip" value="10300" required="required"><br><br>
-  
-  <label for="city">City:</label><br>
-  <input type="text" id="city" name="city" value="Karjaa" required="required"><br><br>
-  
-  <label for="phone">Phone number:</label><br>
-  <input type="text" id="phone" name="phone" value="0401234567" required="required"><br><br>
-  
-  <label for="email">Email:</label><br>
-  <input type="text" id="email" name="email" value="john.doe@example.com"><br><br>
-  
-  <input name="complete-order" type="submit" value="Submit">
-</form> 
+<br>
+<br>
+
+<!-- Pizza condiments start here -->
+<div class="container"><h2 class="pb-2">Condiments</h2>
+  <div class="row">
+    <div class="col-2">
+       <div class="form-check">
+         <input class="form-check-input" type="checkbox" value="oregano" name="oregano" id="oregano">
+         <label class="form-check-label" for="oregano">
+            Oregano
+          </label>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="garlic" name="garlic" id="garlic">
+        <label class="form-check-label" for="garlic">
+        Garlic
+        </label>
+      </div>
+    </div>
+  </div> 
+</div>
+<!-- Pizza condiments end here-->
+ 
+
+<br>
+<br>
+
+<!-- Allergies start here -->
+<div class="container"><h2>Allergies</h2>
+  <div class="row">
+    <div class="col-1">
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="allergy" name="allergy" id="allergy">
+        <label class="form-check-label" for="allergy">
+        Gluten
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Allergies end here -->
+
+<br>
+<br>
+
+<!-- Delivery method start here -->
+<div class="container"><h2>Delivery Method</h2>
+  <div class="row">
+    <div class="col-2">
+    <div class="form-check">
+         <input class="form-check-input" required type="radio" value="delivery"  id="delivery">
+           <label  class="form-check-label" for="delivery">
+            Delivery
+           </label>
+        </div>
+    </div>
+    <div class="col-2">
+    <div class="form-check">
+         <input class="form-check-input" type="radio" value="pick-up" name="pick-up" id="pick-up">
+           <label class="form-check-label" for="pick-up">
+            Pick-up
+           </label>
+        </div>
+    </div>
+  </div>
+</div>
+<!-- Delivery method end here -->
+
+
+<br>
+<br>
+
+<!-- Additional info box start here -->
+<div class="container">
+     <form id="form-box">
+        <div class="form-group">
+         <label for="additional-info"><h3>Additional info</h3></label>
+         <textarea class="form-control" name="additional-info" id="additional-info" rows="3"></textarea>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Additional info box end here -->
+
+<br>
+<br>
+
+<!-- Next page button start here
+<div class="container pb-4">
+<a href="http://localhost/php/dynamiska/pizza_shop/pizza_shop/databasteori/index.php" class="btn btn-info" role="button">Next</a>
+</div>
+ Next page button end here -->
+<input type="submit" value="next" name="order-info">
+</form>
+<!-- Bootstrap link here -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <?php 
-
-  var_dump($_POST);
-  var_dump($_SESSION);
-  
+include_once 'includes/footer.php';
 ?>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
-</html>

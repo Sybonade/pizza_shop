@@ -1,0 +1,11 @@
+.hero-section {
+	background-image: url('../images/pizza_header_4k.webp');
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: whitesmoke;
+	min-height: 500px;
+}
+
+#form-box {
+    width: 50%;
+}
