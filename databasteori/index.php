@@ -25,10 +25,20 @@
 <br>
 
 <!-- Page title -->
-<h1 class="text-center">Select your order</h1>
+<div class="container text-center pt-5 pb-5">
+<h2 class="">About my pizza shop</h2>
+<p class="">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium 
+  doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto 
+  beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
+  sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui 
+  consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+  <a href="editpage.php" class="btn btn-warning align-center mt-2">Edit page text</a>
+</div>
 
 <br>
-<form action="index.php" method="post">
+<h1 class="text-center">Select your order</h1>
+
+<form action="customerinfo.php" method="post">
 <!-- Pizza size here-->
 <div class="container">
   <div class="row">
@@ -166,7 +176,7 @@ $toppings = $pdo->query('SELECT * FROM pizza_topppings')->fetchAll(PDO::FETCH_AS
   <div class="row">
     <div class="col-2">
     <div class="form-check">
-         <input class="form-check-input" required type="radio" value="delivery"  id="delivery">
+         <input class="form-check-input" required type="radio" name="delivery" value="homedelivery"  id="homedelivery">
            <label  class="form-check-label" for="delivery">
             Delivery
            </label>
@@ -174,8 +184,8 @@ $toppings = $pdo->query('SELECT * FROM pizza_topppings')->fetchAll(PDO::FETCH_AS
     </div>
     <div class="col-2">
     <div class="form-check">
-         <input class="form-check-input" type="radio" value="pick-up" name="pick-up" id="pick-up">
-           <label class="form-check-label" for="pick-up">
+         <input class="form-check-input" type="radio" value="pickup" name="delivery" id="pickup">
+           <label class="form-check-label" for="pickup">
             Pick-up
            </label>
         </div>
@@ -190,12 +200,12 @@ $toppings = $pdo->query('SELECT * FROM pizza_topppings')->fetchAll(PDO::FETCH_AS
 
 <!-- Additional info box start here -->
 <div class="container">
-     <form id="form-box">
+     <div id="form-box">
         <div class="form-group">
          <label for="additional-info"><h3>Additional info</h3></label>
          <textarea class="form-control" name="additional-info" id="additional-info" rows="3"></textarea>
         </div>
-      </form>
+          </div>
     </div>
   </div>
 </div>
@@ -211,6 +221,11 @@ $toppings = $pdo->query('SELECT * FROM pizza_topppings')->fetchAll(PDO::FETCH_AS
  Next page button end here -->
 <input type="submit" value="next" name="order-info">
 </form>
+
+<br>
+<br>
+<br>
+
 <!-- Bootstrap link here -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 

@@ -12,7 +12,7 @@ if(isset($_POST['order-info'])){
   $_SESSION['topping4'] = $_POST['topping4'];
 
   if(isset($_POST['oregano'])){
-  $_SESSION['oregano'] = 1;
+  $_SESSION['oregano'] = TRUE;
   }
   else {
     $_SESSION['oregano'] = 0;
@@ -20,7 +20,7 @@ if(isset($_POST['order-info'])){
 
 
   if(isset($_POST['garlic'])){
-    $_SESSION['garlic'] = 1;
+    $_SESSION['garlic'] = TRUE;
     }
     else {
       $_SESSION['garlic'] = 0;
@@ -28,22 +28,21 @@ if(isset($_POST['order-info'])){
 
 
     if(isset($_POST['allergy'])){
-      $_SESSION['allergy'] = 1;
+      $_SESSION['allergy'] = TRUE;
       }
       else {
         $_SESSION['allergy'] = 0;
       }
    
-      if(isset($_POST['delivery'])){
-           $_SESSION['delivery'] = 1;
-       } 
-       else {
-        $_SESSION['delivery'] = 0;
-       }     
+      if($_POST['delivery'] === "homedelivery"){
+        $_SESSION['delivery'] = TRUE;
+        }
+        else {
+          $_SESSION['delivery'] = 0;
+        }    
        
-       if(isset($_POST['additional-info'])){
        $_SESSION['additional-info'] = $_POST['additional-info'];
-  }
+  
 }
 
 
@@ -95,7 +94,7 @@ if(isset($_POST['complete-order'])) {
 <?php 
 
   var_dump($_POST);
-  var_dump($_SESSION);
+  // var_dump($_SESSION);
   
 ?>
 
